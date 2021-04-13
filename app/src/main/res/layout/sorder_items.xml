@@ -84,7 +84,7 @@
            app:fButtonColor="@color/white" />
        <info.hoang8f.widget.FButton
            android:id="@+id/btndelivered"
-           android:text="Delivered"
+           android:text="Issued"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_below="@+id/total"
