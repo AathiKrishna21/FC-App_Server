@@ -1,16 +1,19 @@
 package com.example.fcapp_server;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.fcapp_server.Model.Cart;
@@ -26,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,7 +43,7 @@ public class Home extends AppCompatActivity {
     DatabaseReference dRef,dbRef;
     Order order1;
     String shopId,name,phnno,orderid;
-
+    MaterialSpinner spinner;
     FirebaseRecyclerAdapter<Order, sOrderViewHolder> adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,12 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         deleteOrder(adapter.getRef(position).getKey());
+                    }
+                });
+                holder.btnstatus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        showUpdateDialogue(adapter.getRef(position).getKey(),adapter.getItem(position));
                     }
                 });
                 holder.btndetails.setOnClickListener(new View.OnClickListener() {
@@ -157,5 +167,36 @@ public class Home extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         };
         fromPath.addListenerForSingleValueEvent(valueEventListener);
+    }
+    private void showUpdateDialogue(String key, final Order item) {
+        final AlertDialog.Builder alertDialog=new AlertDialog.Builder(Home.this);
+        alertDialog.setTitle("Update Order Status");
+        alertDialog.setMessage("Please choose status");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View view=inflater.inflate(R.layout.activity_status_update,null);
+
+        spinner = view.findViewById(R.id.status);
+        spinner.setItems("Order Received","Preparing Food","Ready to be collected");
+
+        alertDialog.setView(view);
+
+        final String localkey=key;
+        alertDialog.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                item.setStatus(String.valueOf(spinner.getSelectedIndex()));
+
+                dRef.child(localkey).setValue(item);
+            }
+        });
+        alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 }
