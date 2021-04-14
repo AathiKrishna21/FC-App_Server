@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.fcapp_server.Model.Cart;
+import com.example.fcapp_server.Model.Food;
 import com.example.fcapp_server.Model.Order;
 import com.example.fcapp_server.ViewHolder.sOrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -26,10 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-
+    Food food;
+    List<Cart> cart;
     FirebaseDatabase database;
     DatabaseReference dRef,dbRef;
     Order order1;
@@ -80,6 +85,18 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         deleteOrder(adapter.getRef(position).getKey());
+                    }
+                });
+                holder.btndetails.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        orderid=adapter.getRef(position).getKey();
+
+//                        Cart[] a=cart.toArray(new Cart[cart.size()]);
+                        Intent intent = new Intent(Home.this,Details.class);
+                        intent.putExtra("id",orderid);
+                        startActivity(intent);
+//                        finish();
                     }
                 });
                 holder.btndelivered.setOnClickListener(new View.OnClickListener() {
