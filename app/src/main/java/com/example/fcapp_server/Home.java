@@ -40,9 +40,10 @@ public class Home extends AppCompatActivity {
     Food food;
     List<Cart> cart;
     FirebaseDatabase database;
-    DatabaseReference dRef,dbRef;
+    DatabaseReference dRef,dbRef,Ref;
     Order order1;
     String shopId,name,phnno,orderid;
+    static String dname,dphnno;
     MaterialSpinner spinner;
     FirebaseRecyclerAdapter<Order, sOrderViewHolder> adapter;
     @Override
@@ -53,7 +54,7 @@ public class Home extends AppCompatActivity {
         database= FirebaseDatabase.getInstance();
         dRef= database.getReference("Orders");
         dbRef= database.getReference("PastOrders");
-
+        Ref=database.getReference("Users");
         recyclerView = findViewById(R.id.sorderrecyclerview);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -79,8 +80,20 @@ public class Home extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull sOrderViewHolder holder, final int position, @NonNull Order model) {
-                holder.name.setText(model.getName());
-                holder.phnno.setText(model.getPhonenumber());
+                Ref.child(model.getUId()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        dname = snapshot.child("Name").getValue().toString();
+                        dphnno = snapshot.child("Phonenumber").getValue().toString();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+                holder.name.setText(dname);
+                holder.phnno.setText(dphnno);
                 holder.orderId.setText(adapter.getRef(position).getKey());
                 holder.status.setText(model.getStatus());
                 holder.t_cost.setText(model.getTotalcost());
