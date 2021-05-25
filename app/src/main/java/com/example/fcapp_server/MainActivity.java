@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         window=this.getWindow();
         window.setStatusBarColor(this.getResources().getColor(R.color.status_bar));
-
         setContentView(R.layout.activity_main);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                                         "SignIn unsuccessful: " + task.getException().getMessage(),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Intent intent=new Intent(MainActivity.this, Home.class);
+                                Intent intent=new Intent(MainActivity.this, Navigation1.class);
                                 if(emailID.equals("barathnivas2011@gmail.com")) {
                                     ShopId = "01";
                                 }
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //we will close this activity
         //and take the user to profile activity
         FirebaseUser user=firebaseAuth.getCurrentUser();
-        Intent intent = new Intent(MainActivity.this,Home.class);
+        Intent intent = new Intent(MainActivity.this,Navigation1.class);
         if (user != null) {
             String email=user.getEmail();
             if(email.equals("barathnivas2011@gmail.com")) {

@@ -18,7 +18,6 @@ public class Order {
         UId=uid;
     }
 
-
     public boolean isFavorite() {
         return favorite;
     }

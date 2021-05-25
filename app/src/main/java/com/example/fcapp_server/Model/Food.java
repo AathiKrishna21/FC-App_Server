@@ -5,12 +5,23 @@ public class Food {
     private String MenuId;
     private String Name;
     private String Price;
+    private Boolean Availability;
 
-    public Food(String image, String menuId, String name, String price) {
+
+
+    public Food(String image, String menuId, String name, String price, Boolean availability) {
         Image = image;
         MenuId = menuId;
         Name = name;
         Price = price;
+        Availability=availability;
+    }
+    public Boolean getAvailability() {
+        return Availability;
+    }
+
+    public void setAvailability(Boolean availability) {
+        Availability = availability;
     }
 
     public Food() {

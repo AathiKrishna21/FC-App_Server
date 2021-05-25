@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DishEdit"
+    android:layout_margin="5dp"
+    android:background="@color/grey">
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        app:SpinKit_Color="@color/orange" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relative">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Food ID"
+        android:textSize="28dp"
+        android:id="@+id/foodid"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name : "
+        android:textSize="22dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/foodid"
+        android:id="@+id/name"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/name"
+        android:text="Food name"
+        android:id="@+id/fname"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/foodid"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cost : "
+        android:textSize="22dp"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp"
+        android:layout_below="@+id/name"
+        android:id="@+id/cost"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/name"
+        android:text="Food Cost"
+        android:id="@+id/fcost"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/name"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Image : "
+        android:textSize="22dp"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp"
+        android:layout_below="@+id/cost"
+        android:id="@+id/img"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available : "
+            android:textSize="22dp"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="15dp"
+            android:layout_below="@+id/img"
+            android:id="@+id/avail"
+            />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fimg"
+        android:layout_toRightOf="@id/name"
+        android:text="Food Image"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cost"
+        />
+    <info.hoang8f.widget.FButton
+        android:id="@+id/done"
+        android:text="Done"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        app:cornerRadius="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:textColor="#ffffff"
+        android:backgroundTint="#FF7104"
+        android:layout_alignParentBottom="true"
+        />
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/avail"
+            android:paddingLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/fimg"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </RelativeLayout>
+</RelativeLayout>
